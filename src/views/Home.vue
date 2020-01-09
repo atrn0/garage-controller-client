@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div v-if="token">
-      <p>not logged in</p>
+      <p>logged in</p>
     </div>
     <div v-else>
       <p>login button</p>
@@ -17,7 +17,7 @@ import { getToken, login } from '@/lib/auth'
 export default class Home extends Vue {
   private token: string | null = null
   private loading = true
-  private newToken: string | null = null
+  private newToken = ''
 
   created() {
     this.token = getToken()
@@ -25,7 +25,7 @@ export default class Home extends Vue {
   }
 
   async doLogin() {
-    login(newToken)
+    login(this.newToken)
   }
 }
 </script>
