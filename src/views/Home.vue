@@ -1,12 +1,49 @@
 <template>
-  <div class="home">
-    <div v-if="token">
-      <p>logged in</p>
-    </div>
-    <div v-else>
-      <p>login button</p>
-    </div>
-  </div>
+  <v-container class="fill-height home-root">
+    <v-col v-if="!loading">
+      <v-row v-if="token" align="center" justify="center">
+        <v-col cols="12">
+          <p class="text-center">
+            <v-btn outlined large block height="70px"
+              ><v-icon large>mdi-chevron-up</v-icon></v-btn
+            >
+          </p>
+        </v-col>
+        <v-col cols="12">
+          <p class="text-center">
+            <v-btn outlined large block height="70px"
+              ><v-icon large>mdi-stop</v-icon></v-btn
+            >
+          </p>
+        </v-col>
+        <v-col cols="12">
+          <p class="text-center">
+            <v-btn outlined large block height="70px"
+              ><v-icon large>mdi-chevron-down</v-icon></v-btn
+            >
+          </p>
+        </v-col>
+      </v-row>
+      <v-row v-else justify="center" align="center">
+        <v-col cols="12">
+          <v-form @submit="doLogin">
+            <v-text-field
+              v-model="newToken"
+              label="パスワード"
+              :append-icon="showPasswdIcon ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="showPasswdIcon ? 'text' : 'password'"
+              @click:append="showPasswdIcon = !showPasswdIcon"
+              outlined
+              required
+            />
+            <p class="text-right">
+              <v-btn @click="doLogin" outlined large>ログイン</v-btn>
+            </p>
+          </v-form>
+        </v-col>
+      </v-row>
+    </v-col>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -18,6 +55,7 @@ export default class Home extends Vue {
   private token: string | null = null
   private loading = true
   private newToken = ''
+  private showPasswdIcon = false
 
   created() {
     this.token = getToken()
@@ -26,7 +64,12 @@ export default class Home extends Vue {
 
   async doLogin() {
     login(this.newToken)
+    this.token = getToken()
   }
 }
 </script>
-<style></style>
+<style lang="scss">
+.home-root {
+  box-sizing: border-box;
+}
+</style>
