@@ -1,29 +1,7 @@
 <template>
   <v-container class="fill-height home-root">
     <v-col v-if="!loading">
-      <v-row v-if="token" align="center" justify="center">
-        <v-col cols="12">
-          <p class="text-center">
-            <v-btn outlined large block height="70px"
-              ><v-icon large>mdi-chevron-up</v-icon></v-btn
-            >
-          </p>
-        </v-col>
-        <v-col cols="12">
-          <p class="text-center">
-            <v-btn outlined large block height="70px"
-              ><v-icon large>mdi-stop</v-icon></v-btn
-            >
-          </p>
-        </v-col>
-        <v-col cols="12">
-          <p class="text-center">
-            <v-btn outlined large block height="70px"
-              ><v-icon large>mdi-chevron-down</v-icon></v-btn
-            >
-          </p>
-        </v-col>
-      </v-row>
+      <controller v-if="token" />
       <v-row v-else justify="center" align="center">
         <v-col cols="12">
           <v-form @submit="doLogin">
@@ -49,8 +27,10 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { getToken, login } from '@/lib/auth'
-
-@Component
+import Controller from '@/components/Controller.vue'
+@Component({
+  components: { Controller }
+})
 export default class Home extends Vue {
   private token: string | null = null
   private loading = true
