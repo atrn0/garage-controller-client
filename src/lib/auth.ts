@@ -1,17 +1,17 @@
 const login = (token: string): void => {
-  sessionStorage.setItem('token', token)
+  localStorage.setItem('token', token)
 }
 
 const logout = (): void => {
-  sessionStorage.removeItem('token')
+  localStorage.removeItem('token')
 }
 
 const isLoggedIn = (): boolean => {
-  return !!sessionStorage.getItem('token')
+  return !!localStorage.getItem('token')
 }
 
 const getToken = (): string | null => {
-  return isLoggedIn() ? sessionStorage.getItem('token') : null
+  return isLoggedIn() ? localStorage.getItem('token') : null
 }
 
 export { login, logout, isLoggedIn, getToken }
