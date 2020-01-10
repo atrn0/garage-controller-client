@@ -8,7 +8,6 @@ interface SendCommandRequest {
 const sendCommand = async (
   req: SendCommandRequest
 ): Promise<ErrorResponse | null> => {
-  console.log(sessionStorage.token)
   const res = await instance.post('/handleCommand', req, {
     headers: {
       Authorization: `Bearer ${sessionStorage.token}`
