@@ -5,7 +5,7 @@ interface ErrorResponse {
 }
 
 const instance = axios.create({
-  baseURL: 'https://us-central1-aratasato.cloudfunctions.net/',
+  baseURL: 'https://asia-northeast1-aratasato.cloudfunctions.net/',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json'
