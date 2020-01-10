@@ -32,7 +32,7 @@ import sendCommand from '@/lib/cloudfunctions/sendCommand'
 export default class Controller extends Vue {
   async up() {
     try {
-      const error = await sendCommand({ cmd: 'push', pin: 16 })
+      const error = await sendCommand({ cmd: 'push', pin: 21 })
       if (error) {
         // show warning
       }
@@ -52,7 +52,7 @@ export default class Controller extends Vue {
   }
   async down() {
     try {
-      const error = await sendCommand({ cmd: 'push', pin: 21 })
+      const error = await sendCommand({ cmd: 'push', pin: 16 })
       if (error) {
         // show warning
       }
