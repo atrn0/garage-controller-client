@@ -42,41 +42,29 @@ export default class Controller extends Vue {
 
   async up() {
     try {
-      const error = await sendCommand({ cmd: 'push', pin: 21 })
-      if (error) {
-        logout()
-        this.snackbarText = 'invalid token'
-        this.snackbar = true
-      }
+      await sendCommand({ cmd: 'push', pin: 21 })
     } catch (e) {
-      this.snackbarText = 'something wrong'
+      this.snackbarText = 'リロードしてください'
       this.snackbar = true
+      logout()
     }
   }
   async stop() {
     try {
-      const error = await sendCommand({ cmd: 'push', pin: 20 })
-      if (error) {
-        logout()
-        this.snackbarText = 'invalid token'
-        this.snackbar = true
-      }
+      await sendCommand({ cmd: 'push', pin: 20 })
     } catch (e) {
-      this.snackbarText = 'something wrong'
+      this.snackbarText = 'リロードしてください'
       this.snackbar = true
+      logout()
     }
   }
   async down() {
     try {
-      const error = await sendCommand({ cmd: 'push', pin: 16 })
-      if (error) {
-        logout()
-        this.snackbarText = 'invalid token'
-        this.snackbar = true
-      }
+      await sendCommand({ cmd: 'push', pin: 16 })
     } catch (e) {
-      this.snackbarText = 'something wrong'
+      this.snackbarText = 'リロードしてください'
       this.snackbar = true
+      logout()
     }
   }
 }
