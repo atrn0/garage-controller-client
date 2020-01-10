@@ -10,7 +10,7 @@ const sendCommand = async (
 ): Promise<ErrorResponse | null> => {
   const res = await instance.post('/handleCommand', req, {
     headers: {
-      Authorization: `Bearer ${sessionStorage.token}`
+      Authorization: `Bearer ${localStorage.token}`
     }
   })
   if (res.status !== 204) {
