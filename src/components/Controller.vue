@@ -21,43 +21,62 @@
         >
       </p>
     </v-col>
+    <v-snackbar v-model="snackbar">
+      {{ snackbarText }}
+      <v-btn color="pink" text @click="snackbar = false">
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-row>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import sendCommand from '@/lib/cloudfunctions/sendCommand'
+import { logout } from '@/lib/auth'
 
 @Component
 export default class Controller extends Vue {
+  private snackbar = false
+  private snackbarText = 'error'
+
   async up() {
     try {
       const error = await sendCommand({ cmd: 'push', pin: 21 })
       if (error) {
-        // show warning
+        logout()
+        this.snackbarText = 'invalid token'
+        this.snackbar = true
       }
     } catch (e) {
-      // handle error
+      this.snackbarText = 'something wrong'
+      this.snackbar = true
     }
   }
   async stop() {
     try {
       const error = await sendCommand({ cmd: 'push', pin: 20 })
       if (error) {
-        // show warning
+        logout()
+        this.snackbarText = 'invalid token'
+        this.snackbar = true
       }
     } catch (e) {
-      // handle error
+      this.snackbarText = 'something wrong'
+      this.snackbar = true
     }
   }
   async down() {
     try {
       const error = await sendCommand({ cmd: 'push', pin: 16 })
       if (error) {
-        // show warning
+        logout()
+        this.snackbarText = 'invalid token'
+        this.snackbar = true
       }
     } catch (e) {
-      // handle error
+      this.snackbarText = 'something wrong'
+      this.snackbar = true
     }
   }
 }
